@@ -1,0 +1,50 @@
+class usuario():
+    
+    numUsuarios = 0 #conteo de usuarios
+    
+    def __init__(self, nombre, contraseña):
+        self.nombre = nombre
+        self.contraseña = contraseña
+        
+        self.conectado = False
+        self.intentos = 3
+        
+        usuario.numUsuarios+=1 #conteo de usuarios
+    
+    def conectar(self):
+        miContraseña = input("Ingrese su contraseña: ")
+        if miContraseña == self.contraseña:
+            print("Se ha conectado con exito!!")
+            self.conectado = True
+        else:
+            self.intentos-=1
+            if self.intentos > 0:
+                print("Contraseña incorrecta, intentelo nuevamente")
+                print("Intentos restantes: ", self.intentos)
+                self.conectar()
+            else:
+                print("Error no se puede conectar, contraseña incorrecta")
+                print("Hasta luego!")
+            
+    def desconectar(self):
+        if self.conectado:
+            print("Se cerró sesión con éxito!!")
+            self.conectado = False
+        else:
+            print("Error de inicio de sesión")
+    
+    def __str__(self): #Método para imprimir el usuario
+        if self.conectado:
+            connect = "conectado"
+        else:
+            connect = "desconectado"
+        return f"Mi Nombre de usuario es: {self.nombre} y estoy {connect}"
+    
+user1 = usuario(input("Ingrese su nombre: "), input("Ingrese su contraseña: "))
+print(user1)
+
+user1.conectar()
+print(user1)
+
+user1.desconectar()
+print(user1)
