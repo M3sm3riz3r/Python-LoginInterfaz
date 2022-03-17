@@ -11,8 +11,11 @@ class usuario():
         
         usuario.numUsuarios+=1 #conteo de usuarios
     
-    def conectar(self):
-        miContraseña = input("Ingrese su contraseña: ")
+    def conectar(self, contraseñia=None):
+        if contraseñia==None:
+            miContraseña = input("Ingrese su contraseña: ")
+        else:
+            miContraseña = contraseñia
         if miContraseña == self.contraseña:
             print("Se ha conectado con exito!!")
             self.conectado = True
@@ -20,6 +23,8 @@ class usuario():
             self.intentos-=1
             if self.intentos > 0:
                 print("Contraseña incorrecta, intentelo nuevamente")
+                if contraseñia!=None:
+                    return False
                 print("Intentos restantes: ", self.intentos)
                 self.conectar()
             else:
@@ -39,12 +44,3 @@ class usuario():
         else:
             connect = "desconectado"
         return f"Mi Nombre de usuario es: {self.nombre} y estoy {connect}"
-    
-user1 = usuario(input("Ingrese su nombre: "), input("Ingrese su contraseña: "))
-print(user1)
-
-user1.conectar()
-print(user1)
-
-user1.desconectar()
-print(user1)
