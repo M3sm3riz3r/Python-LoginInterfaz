@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk as ttk
+from tkinter import messagebox as messbox
 from usuarios import usuario
     
 root = Tk()
@@ -49,10 +50,14 @@ def createGUI():
     root.mainloop()
     
 def iniciarSesion():
-    user1.conectar(contraseñaUsuario.get())
-
+    test = user1.conectar(contraseñaUsuario.get())
+    if test:
+        messbox.showinfo("Conectado", "Se inició sesión con éxito")
+    else:
+        messbox.showerror("Error", "Contraseña incorrecta")
+    
 def registrarUsuario():
-        pass
+      pass
 
 
 # Crear interfaz
@@ -60,7 +65,7 @@ if __name__=="__main__":
     # user1 = usuario(input("Ingrese su nombre: "), input("Ingrese su contraseña: "))
     user1 = usuario("Ruben","1234")
    
-    createGUI()
+createGUI()
     
 
 
