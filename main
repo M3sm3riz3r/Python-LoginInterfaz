@@ -1,42 +1,66 @@
 from tkinter import *
 from tkinter import ttk as ttk
+from usuarios import usuario
+    
+root = Tk()
+
+nombreUsuario = StringVar()
+contraseñaUsuario = StringVar()
 
 # ventana principal
-root = Tk()
-root.title("Login usuario")
+def createGUI():
+    #root = Tk()
+    root.geometry('550x200')
+    root.title("~Login de usuario~")
 
-#mainFrame
-mainFrame = Frame(root)
-mainFrame.pack()
-mainFrame.config(width=600,height=420,bg="lightblue")
+    #mainFrame
+    mainFrame = Frame(root)
+    mainFrame.pack()
+    mainFrame.config(width=600,height=420,bg="lightblue")
 
-# labels- textos y itulos
-titulo = Label(mainFrame,text="Login de usuario con Python-tKinter",font=("Arial",24))
-titulo.grid(column=0,row=0,padx=10,pady=10,columnspan=2)
+    # labels- textos y itulos
+    titulo = Label(mainFrame,text="Login de usuario con Python-tKinter",font=("Arial",24))
+    titulo.grid(column=0,row=0,padx=10,pady=10,columnspan=2)
 
-nombreLabel = Label(mainFrame,text="Nombre: ")
-nombreLabel.grid(column=0,row=1)
-passLabel = Label(mainFrame,text="Contraseña: ")
-passLabel.grid(column=0,row=2)
+    nombreLabel = Label(mainFrame,text="Nombre: ")
+    nombreLabel.grid(column=0,row=1)
+    passLabel = Label(mainFrame,text="Contraseña: ")
+    passLabel.grid(column=0,row=2)
 
-# entradas de texto
-nombreUsuario = StringVar()
-nombreUsuario.set("Ruben")
-nombreEntrada = Entry(mainFrame,textvariable=nombreUsuario)
-nombreEntrada.grid(column=1,row=1)
+    # entradas de texto
+    # nombreUsuario = StringVar()
+    nombreUsuario.set("")
+    nombreEntrada = Entry(mainFrame,textvariable=nombreUsuario)
+    nombreEntrada.grid(column=1,row=1)
 
-contraseñaUsuario = StringVar()
-contraseñaUsuario.set("1234")
-contraseñaEntrada = Entry(mainFrame,textvariable=contraseñaUsuario,show="*")
-contraseñaEntrada.grid(column=1,row=2)
+    # contraseñaUsuario = StringVar()
+    contraseñaUsuario.set("")
+    contraseñaEntrada = Entry(mainFrame,textvariable=contraseñaUsuario,show="*")
+    contraseñaEntrada.grid(column=1,row=2)
 
-# botones
-newBut = ttk.Button() #creando botones tipo ttk
-iniciarSesionButton = ttk.Button(mainFrame, text="Iniciar sesión")
-iniciarSesionButton.grid(column=1,row=3,ipadx=5,ipady=5,padx=10,pady=10)
+    # botones
+    newBut = ttk.Button() #creando botones tipo ttk
+    iniciarSesionButton = ttk.Button(mainFrame, text="Iniciar sesión",command=iniciarSesion)
+    iniciarSesionButton.grid(column=1,row=3,ipadx=5,ipady=5,padx=10,pady=10)
 
-registrarButton = ttk.Button(mainFrame, text="Registar sesión")
-registrarButton.grid(column=0,row=3,ipadx=5,ipady=5,padx=10,pady=10)
+    registrarButton = ttk.Button(mainFrame, text="Registar",command=registrarUsuario)
+    registrarButton.grid(column=0,row=3,ipadx=5,ipady=5,padx=10,pady=10)
+ 
+    root.mainloop()
+    
+def iniciarSesion():
+    user1.conectar(contraseñaUsuario.get())
 
-root.mainloop()
+def registrarUsuario():
+        pass
+
+
+# Crear interfaz
+if __name__=="__main__":
+    # user1 = usuario(input("Ingrese su nombre: "), input("Ingrese su contraseña: "))
+    user1 = usuario("Ruben","1234")
+   
+    createGUI()
+    
+
 
