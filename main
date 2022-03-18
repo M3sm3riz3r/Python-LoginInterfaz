@@ -4,8 +4,10 @@ from tkinter import messagebox as messbox
 from usuarios import usuario
     
 root = Tk()
+
 nombreUsuario = StringVar()
 contraseñaUsuario = StringVar()
+usuarios = []
 
 # ventana principal
 def createGUI():
@@ -18,7 +20,7 @@ def createGUI():
     mainFrame.pack()
     mainFrame.config(width=600,height=420,bg="lightblue")
 
-    # labels- textos y itulos
+    # labels- textos y titulos
     titulo = Label(mainFrame,text="Login de usuario con Python-tKinter",font=("Arial",24))
     titulo.grid(column=0,row=0,padx=10,pady=10,columnspan=2)
 
@@ -49,19 +51,30 @@ def createGUI():
     root.mainloop()
     
 def iniciarSesion():
-    test = user1.conectar(contraseñaUsuario.get())
-    if test:
-        messbox.showinfo("Conectado", "Se inició sesión con éxito")
+    for user in usuarios:
+        if user.nombre==nombreUsuario.get():
+            
+            test = user1.conectar(contraseñaUsuario.get())
+            if test:
+                messbox.showinfo("Conectado", "Se inició sesión con éxito")
+            else:
+                messbox.showerror("Error", "Contraseña incorrecta")
+            break
     else:
-        messbox.showerror("Error", "Contraseña incorrecta")
+        messbox.showerror("Error", "No existen usuarios con ese nombre")
     
 def registrarUsuario():
-      pass
+    name =nombreUsuario.get()
+    passwd = contraseñaUsuario.get()
+    newUser = usuario(name, passwd)
+    usuarios.append(newUser)
 
 # Crear interfaz
 if __name__=="__main__":
     # user1 = usuario(input("Ingrese su nombre: "), input("Ingrese su contraseña: "))
     user1 = usuario("Ruben","1234")
+    usuarios.append(user1)
    
 createGUI()
+    
     
