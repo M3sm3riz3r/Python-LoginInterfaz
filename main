@@ -4,7 +4,6 @@ from tkinter import messagebox as messbox
 from usuarios import usuario
     
 root = Tk()
-
 nombreUsuario = StringVar()
 contraseñaUsuario = StringVar()
 
@@ -59,7 +58,6 @@ def iniciarSesion():
 def registrarUsuario():
       pass
 
-
 # Crear interfaz
 if __name__=="__main__":
     # user1 = usuario(input("Ingrese su nombre: "), input("Ingrese su contraseña: "))
@@ -67,5 +65,3 @@ if __name__=="__main__":
    
 createGUI()
     
-
-
