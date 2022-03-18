@@ -10,7 +10,7 @@ contraseñaUsuario = StringVar()
 # ventana principal
 def createGUI():
     #root = Tk()
-    root.geometry('550x200')
+    #root.geometry('550x200')
     root.title("~Login de usuario~")
 
     #mainFrame
