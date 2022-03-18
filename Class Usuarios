@@ -1,4 +1,4 @@
-fclass usuario():
+class usuario():
     
     numUsuarios = 0 #conteo de usuarios
     
