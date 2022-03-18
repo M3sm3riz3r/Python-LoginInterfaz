@@ -1,69 +1,57 @@
-from tkinter import *
-from tkinter import ttk as ttk
-from tkinter import messagebox as messbox
-from usuarios import usuario
+fclass usuario():
     
-root = Tk()
-
-nombreUsuario = StringVar()
-contraseñaUsuario = StringVar()
-
-# ventana principal
-def createGUI():
-    #root = Tk()
-    root.geometry('550x200')
-    root.title("~Login de usuario~")
-
-    #mainFrame
-    mainFrame = Frame(root)
-    mainFrame.pack()
-    mainFrame.config(width=600,height=420,bg="lightblue")
-
-    # labels- textos y itulos
-    titulo = Label(mainFrame,text="Login de usuario con Python-tKinter",font=("Arial",24))
-    titulo.grid(column=0,row=0,padx=10,pady=10,columnspan=2)
-
-    nombreLabel = Label(mainFrame,text="Nombre: ")
-    nombreLabel.grid(column=0,row=1)
-    passLabel = Label(mainFrame,text="Contraseña: ")
-    passLabel.grid(column=0,row=2)
-
-    # entradas de texto
-    # nombreUsuario = StringVar()
-    nombreUsuario.set("")
-    nombreEntrada = Entry(mainFrame,textvariable=nombreUsuario)
-    nombreEntrada.grid(column=1,row=1)
-
-    # contraseñaUsuario = StringVar()
-    contraseñaUsuario.set("")
-    contraseñaEntrada = Entry(mainFrame,textvariable=contraseñaUsuario,show="*")
-    contraseñaEntrada.grid(column=1,row=2)
-
-    # botones
-    newBut = ttk.Button() #creando botones tipo ttk
-    iniciarSesionButton = ttk.Button(mainFrame, text="Iniciar sesión",command=iniciarSesion)
-    iniciarSesionButton.grid(column=1,row=3,ipadx=5,ipady=5,padx=10,pady=10)
-
-    registrarButton = ttk.Button(mainFrame, text="Registar",command=registrarUsuario)
-    registrarButton.grid(column=0,row=3,ipadx=5,ipady=5,padx=10,pady=10)
- 
-    root.mainloop()
+    numUsuarios = 0 #conteo de usuarios
     
-def iniciarSesion():
-    test = user1.conectar(contraseñaUsuario.get())
-    if test:
-        messbox.showinfo("Conectado", "Se inició sesión con éxito")
-    else:
-        messbox.showerror("Error", "Contraseña incorrecta")
+    def __init__(self, nombre, contraseña):
+        self.nombre = nombre
+        self.contraseña = contraseña
+        
+        self.conectado = False
+        self.intentos = 3
+        
+       # usuario.numUsuarios+=1 #conteo de usuarios 
     
-def registrarUsuario():
-      pass
+    def conectar(self, contraseñia=None):
+        if contraseñia==None:
+            miContraseña = input("Ingrese su contraseña: ")
+        else:
+            miContraseña = contraseñia
+        if miContraseña == self.contraseña:
+            print("Se ha conectado con exito!!")
+            self.conectado = True
+            return True
+        else:
+            self.intentos-=1
+            if self.intentos > 0:
+                print("Contraseña incorrecta, intentelo nuevamente")
+                if contraseñia!=None:
+                    return False
+                print("Intentos restantes: ", self.intentos)
+                self.conectar()
+            else:
+                print("Error no se puede conectar, contraseña incorrecta")
+                print("Hasta luego!")
+            
+    def desconectar(self):
+        if self.conectado:
+            print("Se cerró sesión con éxito!!")
+            self.conectado = False
+        else:
+            print("Error de inicio de sesión")
+    
+    def __str__(self): #Método para imprimir el usuario
+        if self.conectado:
+            connect = "conectado"
+        else:
+            connect = "desconectado"
+        return f"Mi Nombre de usuario es: {self.nombre} y estoy {connect}"
+    
+''' user1 = usuario(input("Ingrese su nombre: "), input("Ingrese su contraseña: "))
+print(user1)
 
+user1.conectar()
+print(user1)
 
-# Crear interfaz
-if __name__=="__main__":
-    # user1 = usuario(input("Ingrese su nombre: "), input("Ingrese su contraseña: "))
-    user1 = usuario("Ruben","1234")
-   
-createGUI()
+user1.desconectar()
+print(user1) '''
     
